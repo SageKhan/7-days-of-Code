@@ -1,0 +1,66 @@
+const readline = require('readline');
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+console.log('Bem-vindo ao jogo de escolha de carreira na área de programação!');
+console.log('Você está no início da sua jornada. Vamos começar.');
+
+rl.question('1. Escolha sua área: Front-End ou Back-End? ', (area) => {
+  if (area.toLowerCase() === 'front-end') {
+    rl.question('2. Escolha uma tecnologia: React ou Vue? ', (frontendTech) => {
+      console.log(`Você escolheu Front-End e optou por aprender ${frontendTech}.`);
+
+      rl.question('3. Deseja se especializar na área escolhida ou se tornar Fullstack? (Digite "especializar" ou "fullstack") ', (frontendChoice) => {
+        if (frontendChoice.toLowerCase() === 'especializar') {
+          console.log(`Você decidiu se especializar em ${frontendTech}.`);
+        } else if (frontendChoice.toLowerCase() === 'fullstack') {
+          console.log('Você decidiu se tornar um desenvolvedor Fullstack.');
+        } else {
+          console.log('Opção inválida.');
+        }
+
+        learnTechnologies();
+      });
+    });
+  } else if (area.toLowerCase() === 'back-end') {
+    rl.question('2. Escolha uma tecnologia: C# ou Java? ', (backendTech) => {
+      console.log(`Você escolheu Back-End e optou por aprender ${backendTech}.`);
+
+      rl.question('3. Deseja se especializar na área escolhida ou se tornar Fullstack? (Digite "especializar" ou "fullstack") ', (backendChoice) => {
+        if (backendChoice.toLowerCase() === 'especializar') {
+          console.log(`Você decidiu se especializar em ${backendTech}.`);
+        } else if (backendChoice.toLowerCase() === 'fullstack') {
+          console.log('Você decidiu se tornar um desenvolvedor Fullstack.');
+        } else {
+          console.log('Opção inválida.');
+        }
+
+        learnTechnologies();
+      });
+    });
+  } else {
+    console.log('Opção inválida.');
+    rl.close();
+  }
+});
+
+function learnTechnologies() {
+  rl.question('Digite o nome de uma tecnologia que você gostaria de aprender: ', (tech) => {
+    console.log(`Você gostaria de aprender mais sobre ${tech}.`);
+
+    rl.question('Tem mais alguma tecnologia que você gostaria de aprender? (Digite "sim" ou "não") ', (answer) => {
+      if (answer.toLowerCase() === 'sim') {
+        learnTechnologies();
+      } else if (answer.toLowerCase() === 'não') {
+        console.log('Obrigado por jogar o jogo de escolha de carreira! Boa sorte na sua jornada.');
+        rl.close();
+      } else {
+        console.log('Opção inválida. O jogo será encerrado.');
+        rl.close();
+      }
+    });
+  });
+}

@@ -1,0 +1,43 @@
+// Crie um objeto para armazenar os itens da lista de compras por categoria
+const listaDeCompras = {
+  Frutas: [],
+  Laticínios: [],
+  Congelados: [],
+  Doces: [],
+};
+
+// Função para adicionar um item à lista de compras
+function adicionarItem() {
+  const nomeComida = prompt('Qual comida você deseja adicionar?');
+  if (nomeComida === null || nomeComida === '') {
+    alert('Nome de comida inválido. Tente novamente.');
+    return;
+  }
+
+  const categoriaComida = prompt('Em qual categoria essa comida se encaixa? (Frutas, Laticínios, Congelados, Doces)');
+  if (categoriaComida === null || categoriaComida === '' || !(categoriaComida in listaDeCompras)) {
+    alert('Categoria inválida. Tente novamente.');
+    return;
+  }
+
+  listaDeCompras[categoriaComida].push(nomeComida);
+  alert(`${nomeComida} adicionado à lista de compras na categoria ${categoriaComida}.`);
+}
+
+// Loop para adicionar itens à lista de compras
+while (true) {
+  const adicionar = prompt('Deseja adicionar uma comida na sua lista de compras? (sim ou não)');
+  if (adicionar !== 'sim') {
+    break;
+  }
+  adicionarItem();
+}
+
+// Exibe a lista de compras por categoria
+console.log('Lista de compras:');
+for (const categoria in listaDeCompras) {
+  const itens = listaDeCompras[categoria].join(', ');
+  if (itens) {
+    console.log(`    ${categoria}: ${itens}`);
+  }
+}

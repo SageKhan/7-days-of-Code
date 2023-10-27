@@ -1,0 +1,81 @@
+const listaDeCompras = {
+  Frutas: [],
+  Laticínios: [],
+  Congelados: [],
+  Doces: [],
+};
+
+function adicionarItem() {
+  const nomeComida = prompt('Qual comida você deseja adicionar?');
+  if (nomeComida === null || nomeComida === '') {
+    alert('Nome de comida inválido. Tente novamente.');
+    return;
+  }
+
+  const categoriaComida = prompt('Em qual categoria essa comida se encaixa? (Frutas, Laticínios, Congelados, Doces)');
+  if (categoriaComida === null || categoriaComida === '' || !(categoriaComida in listaDeCompras)) {
+    alert('Categoria inválida. Tente novamente.');
+    return;
+  }
+
+  listaDeCompras[categoriaComida].push(nomeComida);
+  alert(`${nomeComida} adicionado à lista de compras na categoria ${categoriaComida}.`);
+}
+
+function removerItem() {
+  // Exibir os elementos presentes na lista atual
+  console.log('Itens na lista atual:');
+  for (const categoria in listaDeCompras) {
+    const itens = listaDeCompras[categoria].join(', ');
+    if (itens) {
+      console.log(`    ${categoria}: ${itens}`);
+    }
+  }
+
+  const nomeComida = prompt('Qual item você deseja remover da lista?');
+  if (nomeComida === null || nomeComida === '') {
+    alert('Nome de comida inválido. Tente novamente.');
+    return;
+  }
+
+  let itemEncontrado = false;
+
+  for (const categoria in listaDeCompras) {
+    const index = listaDeCompras[categoria].indexOf(nomeComida);
+    if (index !== -1) {
+      listaDeCompras[categoria].splice(index, 1); // Remove o item
+      itemEncontrado = true;
+      alert(`${nomeComida} removido da lista de compras.`);
+      break;
+    }
+  }
+
+  if (!itemEncontrado) {
+    alert(`Não foi possível encontrar "${nomeComida}" dentro da lista.`);
+  }
+}
+
+while (true) {
+  const acao = prompt('Deseja adicionar uma comida na sua lista de compras, remover um item ou sair? (adicionar/remover/sair)');
+  if (acao === 'adicionar') {
+    adicionarItem();
+  } else if (acao === 'remover') {
+    if (Object.values(listaDeCompras).flat().length === 0) {
+      alert('A lista de compras está vazia. Nada para remover.');
+    } else {
+      removerItem();
+    }
+  } else if (acao === 'sair') {
+    break;
+  } else {
+    alert('Ação inválida. Tente novamente.');
+  }
+}
+
+console.log('Lista de compras:');
+for (const categoria in listaDeCompras) {
+  const itens = listaDeCompras[categoria].join(', ');
+  if (itens) {
+    console.log(`    ${categoria}: ${itens}`);
+  }
+}

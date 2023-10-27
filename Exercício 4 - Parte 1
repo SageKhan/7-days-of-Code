@@ -1,0 +1,21 @@
+import random
+
+def jogo_adivinhacao(numero):
+    tentativas = 0
+    max_tentativas = 3
+
+    while tentativas < max_tentativas:
+        tentativa = int(input("Tente adivinhar o número (entre 0 e 10): ")
+        
+        if tentativa == numero:
+            print("Parabéns! Você acertou o número.")
+            break
+        else:
+            print("Tente novamente.")
+            tentativas += 1
+
+    if tentativas == max_tentativas:
+        print(f"Suas {max_tentativas} tentativas acabaram. O número era {numero}.")
+
+numero_predefinido = 7
+jogo_adivinhacao(numero_predefinido)

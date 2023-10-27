@@ -1,0 +1,26 @@
+import random
+
+//Gera um número aleatório entre 0 e 10
+numero_secreto = random.randint(0, 10)
+
+//Inicialização das tentativas
+tentativas = 0
+max_tentativas = 3
+
+while tentativas < max_tentativas:
+    try:
+        //Solicita ao usuário para adivinhar o número
+        chute = int(input("Adivinhe o número entre 0 e 10: "))
+
+        //Verifica se o chute é correto
+        if chute == numero_secreto:
+            print("Parabéns! Você acertou o número.")
+            break
+        else:
+            print("Tente novamente.")
+            tentativas += 1
+    except ValueError:
+        print("Por favor, insira um número válido.")
+
+if tentativas == max_tentativas:
+    print(f"Suas tentativas acabaram. O número era {numero_secreto}.")
